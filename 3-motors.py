@@ -1,39 +1,28 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 # CamJam EduKit 3 - Robotics 
 # Worksheet 3 - Motor Test Code 
+# GPIOZero version
 
-import RPi.GPIO as GPIO 
-# Import the GPIO Library 
-import time 
-# Import the Time library 
+from gpiozero import CamJamKitRobot
+from time import sleep
 
-# Set the GPIO modes 
-GPIO.setmode(GPIO.BCM) 
-GPIO.setwarnings(False) 
-
-# Set the GPIO Pin mode 
-GPIO.setup(7, GPIO.OUT) 
-GPIO.setup(8, GPIO.OUT) 
-GPIO.setup(9, GPIO.OUT) 
-GPIO.setup(10, GPIO.OUT) 
+robot = CamJamKitRobot()
 
 # Turn all motors off 
-GPIO.output(7, 0) 
-GPIO.output(8, 0) 
-GPIO.output(9, 0) 
-GPIO.output(10, 0) 
+robot.stop()
 
 # Turn the right motor forwards 
-GPIO.output(9, 0) 
-GPIO.output(10, 1) 
-
-# Turn the left motor forwards 
-GPIO.output(7, 0) 
-GPIO.output(8, 1) 
+robot.right()
 
 # Wait for 1 second 
-time.sleep(2) 
+sleep(1)
 
-# Reset the GPIO pins (turns off motors too) 
-GPIO.cleanup()
+# Turn the left motor forwards 
+robot.left()
+
+# Wait for 1 second 
+sleep(1) 
+
+# Turns off motors
+robot.stop()
